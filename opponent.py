@@ -6,6 +6,17 @@ class Opponent:
         """
         self.is_star = is_star
 
+    def collide(self, shot, game):
+        """
+        Handle collision with a player's shot.
+        :param shot: The player's shot.
+        :param game: The game instance to update the score.
+        """
+        if shot.hit_target(self):
+            if not self.is_star:
+                self.convert_to_star()
+                game.update_score(1)  # Incrementar puntuación
+                
     def move(self):
         """
         Logic for moving the opponent.

@@ -2,18 +2,32 @@ from character import Character
 
 class Player(Character):
     def __init__(self, x, y, width, height, health):
-        """
-        Initialize the player with position, size, health, score, and lives.
-
-        :param x: The x-coordinate of the player.
-        :param y: The y-coordinate of the player.
-        :param width: The width of the player.
-        :param height: The height of the player.
-        :param health: The health points of the player.
-        """
         super().__init__(x, y, width, height, health)
         self.score = 0
-        self.lives = 3
+        self.lives = 3  # Vidas iniciales
+
+    def take_damage(self, amount, game):
+        """
+        Reduce the player's health and handle lives.
+        :param amount: Damage amount.
+        :param game: The game instance to check for game over.
+        """
+        super().take_damage(amount)
+        if not self.is_alive():
+            self.lives -= 1
+            print(f"Player lost a life! Remaining lives: {self.lives}")
+            if self.lives <= 0:
+                game.end_game()
+            else:
+                self.respawn()
+
+    def respawn(self):
+        """
+        Respawn the player after losing a life.
+        """
+        self.health = 100
+        self.x, self.y = 50, 400  # Reset position
+        print("Player respawned!")
 
     def move(self, direction):
         """
@@ -37,10 +51,3 @@ class Player(Character):
         projectile = super().shoot()  # Use the shoot method from Character
         print("Player shoots!")
         return projectile
-
-    def earn_star(self):
-        """
-        Increases the player's score by 1 when they earn a star.
-        """
-        self.score += 1
-        print(f"Player earned a star! New score: {self.score}")

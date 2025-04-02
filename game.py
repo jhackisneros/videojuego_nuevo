@@ -24,11 +24,25 @@ class Game:
         """
         if not self.is_running:
             return
+    def update_score(self, points):
+        """
+        Update the player's score.
+        :param points: Points to add to the score.
+        """
+        self.score += points
+        print(f"Score updated! Current score: {self.score}")
+    
 
         # Example logic for updating game state
         self.player.update(0)  # Update player state
         self.opponent.move()   # Move the opponent
         print("Game updated!")
+
+    def display_status(self):
+        """
+        Display the player's score and lives on the screen.
+        """
+        print(f"Score: {self.score} | Lives: {self.player.lives}")
 
     def end_game(self):
         """
