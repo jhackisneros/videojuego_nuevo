@@ -16,7 +16,7 @@ class Opponent:
             if not self.is_star:
                 self.convert_to_star()
                 game.update_score(1)  # Incrementar puntuación
-                
+
     def move(self):
         """
         Logic for moving the opponent.
@@ -44,3 +44,17 @@ class Opponent:
         """
         self.is_star = True
         print("Opponent has converted into a star!")
+
+from opponent import Opponent
+
+class Boss(Opponent):
+    def __init__(self):
+        super().__init__()
+        self.speed = 20  # Doble de velocidad
+
+    def move(self):
+        """
+        Move the boss faster than regular opponents.
+        """
+        print("Boss is moving twice as fast!")
+        # Implement boss-specific movement logic

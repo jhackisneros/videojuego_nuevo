@@ -44,9 +44,22 @@ class Game:
         """
         print(f"Score: {self.score} | Lives: {self.player.lives}")
 
+    def remove_opponent(self, opponent):
+        """
+        Remove an opponent and spawn a boss if necessary.
+        :param opponent: The opponent to remove.
+        """
+        if isinstance(opponent, Opponent):
+            print("Opponent defeated!")
+            self.opponent = Boss()  # Aparece el jefe final
+            print("Boss has appeared!")
+
     def end_game(self):
         """
-        End the game by setting is_running to False.
+        End the game and display a victory or game over message.
         """
         self.is_running = False
-        print("Game over!")
+        if isinstance(self.opponent, Boss) and self.player.lives > 0:
+            print("Victory! You defeated the boss!")
+        else:
+            print("Game over!")
