@@ -49,12 +49,45 @@ from opponent import Opponent
 
 class Boss(Opponent):
     def __init__(self):
+        """
+        Initialize the Boss with enhanced attributes.
+        """
         super().__init__()
-        self.speed = 20  # Doble de velocidad
+        self.health = 200  # Boss has more health
+        self.speed = 20    # Boss moves faster than regular opponents
+        self.damage = 20   # Boss deals more damage
 
     def move(self):
         """
         Move the boss faster than regular opponents.
         """
         print("Boss is moving twice as fast!")
-        # Implement boss-specific movement logic
+        # Implement boss-specific movement logic here
+        # Example: Move the boss in a zigzag pattern
+        self.x += self.speed
+        if self.x > 800 or self.x < 0:  # Assuming screen width is 800
+            self.speed = -self.speed  # Reverse direction
+
+    def shoot(self):
+        """
+        Boss shoots more powerful projectiles.
+        """
+        print("Boss is shooting powerful projectiles!")
+        # Implement boss-specific shooting logic here
+        # Example: Shoot multiple projectiles at once
+        return [
+            {"x": self.x, "y": self.y, "speed": -10, "damage": self.damage},
+            {"x": self.x - 10, "y": self.y, "speed": -10, "damage": self.damage},
+            {"x": self.x + 10, "y": self.y, "speed": -10, "damage": self.damage},
+        ]
+
+    def take_damage(self, amount):
+        """
+        Reduce the boss's health and check if defeated.
+        """
+        self.health -= amount
+        print(f"Boss takes {amount} damage! Remaining health: {self.health}")
+        if self.health <= 0:
+            self.health = 0
+            self.active = False  # Deactivate the boss
+            print("Boss defeated!")
