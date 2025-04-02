@@ -60,3 +60,17 @@ class Character(Entity):
         """
         # Example: Add custom rendering logic here
         pass
+
+    def shoot(self):
+        """
+        Simulate the character shooting a projectile.
+
+        :return: A dictionary representing the projectile's initial state.
+        """
+        projectile = {
+            "x": self.x + self.width // 2,  # Start at the center of the character
+            "y": self.y,
+            "speed": -10,  # Example speed (negative for upward movement)
+            "damage": 10  # Example damage value
+        }
+        return projectile
