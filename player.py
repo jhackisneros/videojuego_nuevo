@@ -37,3 +37,10 @@ class Player(Character):
         projectile = super().shoot()  # Use the shoot method from Character
         print("Player shoots!")
         return projectile
+
+    def earn_star(self):
+        """
+        Increases the player's score by 1 when they earn a star.
+        """
+        self.score += 1
+        print(f"Player earned a star! New score: {self.score}")

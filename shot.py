@@ -45,7 +45,7 @@ class Shot:
             shot_bounds[1] + shot_bounds[3] > target_bounds[1]
         ):
             self.active = False  # Deactivate the shot after hitting
-            target.health -= 1  # Reduce the target's health by 1
+            target.health -= 10  # Reduce the target's health by 1
             return True
 
         return False
